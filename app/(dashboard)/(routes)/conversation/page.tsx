@@ -20,6 +20,7 @@ import { Loader } from "@/components/Loader";
 import { UserAvatar } from "@/components/UserAvatar";
 import { BotAvatar } from "@/components/BotAvatar";
 import { useProModal } from "@/hooks/use-pro-modal";
+import { toast } from "react-hot-toast";
 
 const page = () => {
   const proModal = useProModal()
@@ -51,6 +52,9 @@ const page = () => {
     } catch (err: any) {
       if(err?.response?.status === 403){
         proModal.onOpen() 
+      }
+      else{
+        toast.error("Something went wrong")
       }
     } finally {
       router.refresh();
