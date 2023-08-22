@@ -18,7 +18,7 @@ import { Loader } from "@/components/Loader";
 import { useProModal } from "@/hooks/use-pro-modal";
 import { toast } from "react-hot-toast";
 
-const page = () => {
+const Page = () => {
   const proModal = useProModal();
   const router = useRouter();
   const [music, setMusic] = useState<string>();
@@ -109,4 +109,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

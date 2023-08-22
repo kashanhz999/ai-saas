@@ -22,7 +22,7 @@ import { BotAvatar } from "@/components/BotAvatar";
 import { useProModal } from "@/hooks/use-pro-modal";
 import { toast } from "react-hot-toast";
 
-const page = () => {
+const Page = () => {
   const proModal = useProModal()
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
@@ -132,4 +132,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
