@@ -15,6 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/Empty";
 import { Loader } from "@/components/Loader";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const page = () => {
   const router = useRouter();
@@ -27,7 +28,7 @@ const page = () => {
   });
 
   const isLoading = form.formState.isSubmitting;
-
+  const proModal = useProModal()
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setVideo(undefined);
@@ -37,7 +38,9 @@ const page = () => {
 
       //TODO Open pro model
     } catch (err: any) {
-      console.log(err);
+      if(err?.response?.status === 403){
+        proModal.onOpen() 
+      }
     } finally {
       router.refresh();
     }

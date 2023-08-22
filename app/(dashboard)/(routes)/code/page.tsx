@@ -21,8 +21,10 @@ import { Loader } from "@/components/Loader";
 import { UserAvatar } from "@/components/UserAvatar";
 import { BotAvatar } from "@/components/BotAvatar";
 import { Code } from "lucide-react";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const page = () => {
+  const proModal = useProModal()
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -49,7 +51,9 @@ const page = () => {
 
       //TODO Open pro model
     } catch (err: any) {
-      console.log(err);
+      if(err?.response?.status === 403){
+        proModal.onOpen() 
+      }
     } finally {
       router.refresh();
     }

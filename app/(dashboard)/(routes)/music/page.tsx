@@ -15,8 +15,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Empty } from "@/components/Empty";
 import { Loader } from "@/components/Loader";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 const page = () => {
+  const proModal = useProModal();
   const router = useRouter();
   const [music, setMusic] = useState<string>();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -37,7 +39,9 @@ const page = () => {
 
       //TODO Open pro model
     } catch (err: any) {
-      console.log(err);
+      if(err?.response?.status === 403){
+        proModal.onOpen() 
+      }
     } finally {
       router.refresh();
     }
